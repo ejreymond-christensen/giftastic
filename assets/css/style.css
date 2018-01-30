@@ -1,0 +1,9 @@
+#giphyBox{
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.gif{
+  margin: 5px;
+}
