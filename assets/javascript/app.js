@@ -1,11 +1,13 @@
 //model
-var topics= ["dog", "cat", "ferret", "elephant", "coyote", "wolf", "bird"];
+var topics= ["Moonbeam City", "Space Ghost", "Aqua Teen Hunger Force", "Ren and Stimpy", "Thunder Cats", "Cowboy Beebop", "Goldorak", "SilverHawk", "Sailor Moon", "Dino-Riders", "Speed Racer", "My Little Pony", "Carebears", "Fraggle Rock", "Smurfs", "Samurai Champloo", "DragonballZ", "Saint Seiya", "Sealab 2021", "Inuyasha", "Lupin the 3rd"];
 
 var apiKey= "dc6zaTOxFJmzC";
 var buttonQuery="";
 
 var displayGifs= function(){
   var queryURL = "http://api.giphy.com/v1/gifs/search?q="+buttonQuery+"&api_key=dc6zaTOxFJmzC&limit=10";
+
+  $("#giphyBox").empty();
 
   $.ajax({
     url: queryURL,
@@ -14,8 +16,12 @@ var displayGifs= function(){
     console.log(results);
     for (var i = 0; i < results.data.length; i++) {
       //console.log('coucou');
-      //$("#giphyBox").append("<p>"+results.data[i].rating+"</p>");
-      $("#giphyBox").append("<img class='gif' id='"+buttonQuery+i+"'src='"+results.data[i].images.fixed_height.url+"'>");
+      var newDiv= $("<div class= gifContainer>");
+
+      $(newDiv).html("<img class='gif hide' id='"+buttonQuery+i+"'src='"+results.data[i].images.fixed_height.url+"'>");
+      $(newDiv).append("<img class='gif' id='"+buttonQuery+i+"'src='"+results.data[i].images.fixed_height_still.url+"'>");
+      $(newDiv).append("<p>Rating: "+results.data[i].rating.toUpperCase()+"</p>");
+      $("#giphyBox").append(newDiv);
     }
   });
 };
@@ -46,6 +52,10 @@ $("#submitSearchInput").on("click", function(event){
 $(document).on("click", ".gifButton", function(){
   buttonQuery= $(this).text();
   displayGifs();
+});
+
+$(document).on("click", ".gifContainer", function(){
+  $(this).find("img").toggleClass("hide");
 });
 
 // sample search http://api.giphy.com/v1/gifs/search?q=messi&api_key=dc6zaTOxFJmzC&limit=10
