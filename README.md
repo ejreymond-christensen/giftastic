@@ -1,4 +1,4 @@
-# giftastic
+# Giftastic
 dynamic web page that populates with gifs of your choice
 
 ### GifTastic Giphy Generator
